@@ -1,0 +1,19 @@
+﻿<Window x:Class="kurs_rab.UpAddDevice"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:kurs_rab"
+        mc:Ignorable="d"
+        Title="UpAddDevice" Height="329" Width="317">
+    <Grid Margin="0,0,10,-6">
+        <ComboBox Name="comboDevice"  HorizontalAlignment="Left" Height="25" Margin="144,155,0,0" VerticalAlignment="Top" Width="139"/>
+        <TextBox Name ="memory" HorizontalAlignment="Left" Height="25" Margin="144,102,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="139"/>
+        <TextBox Name ="nameDevice" HorizontalAlignment="Left" Height="25" Margin="144,60,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="139" RenderTransformOrigin="0.604,0.475"/>
+        <Button Name ="butt" Content="" HorizontalAlignment="Left" Height="34" Margin="86,229,0,0" VerticalAlignment="Top" Width="128" Click="Button_Click"/>
+        <Label Content="Имя устройства" HorizontalAlignment="Left" Margin="37,59,0,0" VerticalAlignment="Top"/>
+        <Label Content="Объем памяти" HorizontalAlignment="Left" Margin="37,101,0,0" VerticalAlignment="Top"/>
+        <Label Content="Тип устройства" HorizontalAlignment="Left" Margin="37,0,0,0" VerticalAlignment="Center"/>
+
+    </Grid>
+</Window>

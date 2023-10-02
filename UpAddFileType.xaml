@@ -1,0 +1,19 @@
+﻿<Window x:Class="kurs_rab.UpAddFileType"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:kurs_rab"
+        mc:Ignorable="d"
+        Title="UpAddFileType" Height="358" Width="276">
+    <Grid Margin="0,10,10,-6">
+        <Button Name ="Butt" Content="" HorizontalAlignment="Center" Height="46" Margin="0,243,0,0" VerticalAlignment="Top" Width="130" Click="Butt_Click"/>
+        <TextBox Name= "nameType" HorizontalAlignment="Left" Height="30" Margin="133,85,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="130"/>
+        <TextBox Name ="expansionType" HorizontalAlignment="Left" Height="30" Margin="133,134,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="130"/>
+        <TextBox Name ="programsType" HorizontalAlignment="Left" Height="30" Margin="133,187,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="130"/>
+        <Label Content="Название типа" HorizontalAlignment="Left" Margin="10,89,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.532,0.173" Width="85"/>
+        <Label Content="Расширение" HorizontalAlignment="Left" Margin="10,138,0,0" VerticalAlignment="Top" Width="85"/>
+        <Label Content="Программы" HorizontalAlignment="Left" Margin="10,191,0,0" VerticalAlignment="Top" Width="85"/>
+
+    </Grid>
+</Window>

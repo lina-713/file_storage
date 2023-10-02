@@ -1,0 +1,17 @@
+﻿<Window x:Class="kurs_rab.DeviceType"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:kurs_rab"
+        mc:Ignorable="d"
+        Title="DeviceType" Height="450" Width="800">
+    <Grid>
+        <DataGrid Name="gridDeviceType" HorizontalAlignment="Left" Height="234" Margin="36,34,0,0" VerticalAlignment="Top" Width="733" d:ItemsSource="{d:SampleData ItemCount=5}"/>
+        <Button Name ="AddButt" Content="Добавление" HorizontalAlignment="Left" Height="43" Margin="36,343,0,0" VerticalAlignment="Top" Width="129" Click="AddButt_Click"/>
+        <Button Name ="UpdateButt" Content="Изменение" HorizontalAlignment="Left" Height="43" Margin="234,343,0,0" VerticalAlignment="Top" Width="129" Click="UpdateButt_Click"/>
+        <Button Name ="deleteButt" Content="Удаление" HorizontalAlignment="Left" Height="43" Margin="435,343,0,0" VerticalAlignment="Top" Width="129" Click="deleteButt_Click"/>
+        <Button Content="Вывод" HorizontalAlignment="Left" Height="43" Margin="614,343,0,0" VerticalAlignment="Top" Width="137" Click="Button_Click"/>
+
+    </Grid>
+</Window>

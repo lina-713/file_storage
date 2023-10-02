@@ -1,0 +1,15 @@
+﻿<Window x:Class="kurs_rab.UpAddDeviceType"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:kurs_rab"
+        mc:Ignorable="d"
+        Title="UpAddDeviceType" Height="218" Width="281">
+    <Grid Margin="0,0,0,-6">
+        <Button Name ="upAddType" Content="" HorizontalAlignment="Center" Height="42" Margin="0,104,0,0" VerticalAlignment="Top" Width="137" Click="UpAddDeviceType_Click"/>
+        <TextBox Name ="typeBox" HorizontalAlignment="Left" Height="28" Margin="134,40,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="137"/>
+        <Label Content="Тип устройства" HorizontalAlignment="Left" Height="28" Margin="10,40,0,0" VerticalAlignment="Top" Width="94"/>
+
+    </Grid>
+</Window>
