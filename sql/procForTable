@@ -1,0 +1,120 @@
+CREATE OR REPLACE PROCEDURE public.add_new_device(
+	IN new_name text,
+	IN new_memory_size integer,
+	IN new_type_id integer)
+LANGUAGE 'plpgsql'
+AS $BODY$
+BEGIN
+	insert into device(name, memory_size, type_id) values(new_name,new_memory_size,new_type_id);
+END;
+$BODY$;
+
+CREATE OR REPLACE PROCEDURE public.add_new_file(
+	IN new_name text,
+	IN type_id integer,
+	IN new_size integer,
+	IN new_date timestamp without time zone,
+	IN new_device_id integer)
+LANGUAGE 'plpgsql'
+AS $BODY$
+BEGIN
+	insert into files(name, type_id, size, date, device_id) values(new_name, type_id, new_size, new_date, new_device_id);
+END;
+$BODY$;
+
+CREATE OR REPLACE PROCEDURE public.add_new_filetype(
+	IN new_name text,
+	IN new_expansion text,
+	IN new_programs text)
+LANGUAGE 'plpgsql'
+AS $BODY$
+BEGIN
+	insert into typeoffiles(name_type, expansion, programs) values(new_name, new_expansion, new_programs);
+END;
+$BODY$;
+
+CREATE OR REPLACE PROCEDURE public.delete_device(
+	IN delete_id integer)
+LANGUAGE 'plpgsql'
+AS $BODY$
+BEGIN
+	delete from device where device.id = delete_id ;
+END;
+$BODY$;
+
+CREATE OR REPLACE PROCEDURE public.delete_devicetype(
+	IN delete_id integer)
+LANGUAGE 'plpgsql'
+AS $BODY$
+BEGIN
+	delete from type_of_device where type_of_device.id = delete_id ;
+END;
+$BODY$;
+
+CREATE OR REPLACE PROCEDURE public.delete_files(
+	IN delete_id integer)
+LANGUAGE 'plpgsql'
+AS $BODY$
+BEGIN
+	delete from files where files.id = delete_id ;
+END;
+$BODY$;
+
+CREATE OR REPLACE PROCEDURE public.delete_filetype(
+	IN delete_id integer)
+LANGUAGE 'plpgsql'
+AS $BODY$
+BEGIN
+	delete from typeoffiles where typeoffiles.id = delete_id ;
+END;
+$BODY$;
+
+CREATE OR REPLACE PROCEDURE public.update_device(
+	IN new_name text,
+	IN new_memory_size integer,
+	IN new_type_id integer,
+	IN new_id integer)
+LANGUAGE 'plpgsql'
+AS $BODY$
+BEGIN
+	update device set name = new_name, memory_size = new_memory_size, type_id = new_type_id where id = new_id ;
+END;
+$BODY$;
+
+CREATE OR REPLACE PROCEDURE public.update_file(
+	IN new_name text,
+	IN new_type_id integer,
+	IN new_size integer,
+	IN update_id integer,
+	IN new_device_id integer)
+LANGUAGE 'plpgsql'
+AS $BODY$
+BEGIN
+	update files set name = new_name, type_id = new_type_id, size = new_size, device_id = new_device_id where id = update_id;
+END;
+$BODY$;
+
+CREATE OR REPLACE PROCEDURE public.update_filetype(
+	IN new_name text,
+	IN new_expansion text,
+	IN new_programs text,
+	IN new_id integer)
+LANGUAGE 'plpgsql'
+AS $BODY$
+BEGIN
+	update typeoffiles set name_type = new_name , expansion = new_expansion, programs = new_programs where id = new_id;
+END;
+$BODY$;
+
+CREATE OR REPLACE PROCEDURE public.updateoradd_devicetype(
+	IN new_name text,
+	IN new_id integer)
+LANGUAGE 'plpgsql'
+AS $BODY$
+BEGIN
+	CASE
+		WHEN new_id <> 0 THEN update type_of_device set name = new_name where id = new_id;
+		else insert into type_of_device(name) values(new_name); 
+	end case;
+END;
+$BODY$;
