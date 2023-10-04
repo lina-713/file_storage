@@ -1,0 +1,20 @@
+CREATE OR REPLACE PROCEDURE public.curs_procedure(
+	)
+LANGUAGE 'plpgsql'
+AS $BODY$
+declare 
+curs cursor for Select * from typeoffiles;
+full_volume int;
+volume RECORD;
+BEGIN
+open curs;
+loop
+fetch curs into volume;
+exit when not found;
+full_volume := (select COUNT(type_id) from files where files.type_id = typeoffiles.id);
+update view_typeoffiles
+	set count_files = Concat('Всего',rec.size, 'файлов') where view_typeoffiles.id = rec.id;
+end loop;
+close curs;
+end;
+$BODY$;
