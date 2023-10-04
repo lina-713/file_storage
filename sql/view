@@ -1,0 +1,48 @@
+CREATE OR REPLACE VIEW public.view_device
+ AS
+ SELECT device.id,
+    device.name,
+    device.memory_size,
+    type_of_device.name AS name_of_type
+   FROM device
+     LEFT JOIN type_of_device ON device.type_id = type_of_device.id;
+
+CREATE OR REPLACE VIEW public.view_devicetype
+ AS
+ SELECT type_of_device.id,
+    type_of_device.name,
+    ( SELECT count_devicetype.count_devicetype
+           FROM count_devicetype(type_of_device.id) count_devicetype(count_devicetype)) AS device_count
+   FROM type_of_device
+     LEFT JOIN device ON device.type_id = type_of_device.id
+  GROUP BY type_of_device.id;
+
+CREATE OR REPLACE VIEW public.view_files
+ AS
+ SELECT files.id,
+    files.name,
+    files.size,
+    files.date,
+    ( SELECT device.name
+           FROM device
+          WHERE device.id = files.device_id) AS devicename,
+    ( SELECT typeoffiles_1.name_type
+           FROM typeoffiles typeoffiles_1
+          WHERE typeoffiles_1.id = files.type_id) AS name_type,
+    ( SELECT typeoffiles_1.expansion
+           FROM typeoffiles typeoffiles_1
+          WHERE typeoffiles_1.id = files.type_id) AS expansion,
+    ( SELECT typeoffiles_1.programs
+           FROM typeoffiles typeoffiles_1
+          WHERE typeoffiles_1.id = files.type_id) AS programs
+   FROM files
+     LEFT JOIN typeoffiles ON files.id = typeoffiles.id;
+
+CREATE OR REPLACE VIEW public.view_typeoffiles
+ AS
+ SELECT typeoffiles.id,
+    typeoffiles.name_type,
+    typeoffiles.expansion,
+    typeoffiles.programs,
+    concat('Всего файлов') AS count_file
+   FROM typeoffiles;
