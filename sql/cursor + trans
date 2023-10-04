@@ -18,3 +18,23 @@ end loop;
 close curs;
 end;
 $BODY$;
+
+create or replace procedure transaction_func() 
+as
+$$
+declare 
+full_volume int;
+begin 
+call curs_procedure();
+if exists(select SUM(type_id) from files where files.type_id = typeoffiles.id)> 10
+then 
+	update view_typeoffiles
+	set count_file = 'Больше 10 файлов' 
+	where view_typeoffiles.id = typeoffiles.id;
+else 
+rollback;
+end if;
+commit;
+end;
+$$
+language plpgsql;
