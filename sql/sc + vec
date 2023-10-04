@@ -1,0 +1,28 @@
+CREATE OR REPLACE FUNCTION public.count_devicetype(
+	id_devicetype integer)
+    RETURNS integer
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+AS $BODY$
+DECLARE
+device_count INTEGER;
+BEGIN
+SELECT COUNT(*) INTO device_count FROM device WHERE type_id = id_devicetype;
+RETURN device_count;
+END;
+$BODY$;
+
+CREATE OR REPLACE FUNCTION public.fill_devicetype(
+	col_1 text,
+	col_2 text)
+    RETURNS TABLE(id integer, name text, count_device integer) 
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+    ROWS 1000
+AS $BODY$
+begin
+	RETURN QUERY EXECUTE format('select %I, %I, (select * from count_device()) as count_device from type_of_device', col_1, col_2);
+end;
+$BODY$;
