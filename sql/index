@@ -1,0 +1,13 @@
+CREATE INDEX IF NOT EXISTS index_typeoffiles
+    ON public.typeoffiles USING btree
+    (name_type ASC NULLS LAST)
+    TABLESPACE pg_default; 
+
+CREATE INDEX IF NOT EXISTS index_files
+    ON public.files USING btree
+    (date ASC NULLS LAST)
+    TABLESPACE pg_default; 
+
+CREATE INDEX IF NOT EXISTS index_device
+    ON public.device USING btree
+    (memory_size ASC NULLS LAST)
