@@ -1,0 +1,16 @@
+create role all_admin 
+GRANT CONNECT ON DATABASE "FilesDb" to all_admin
+GRANT ALL PRIVILEGES ON DATABASE "FilesDb" to all_admin
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO all_admin
+GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO all_admin
+CREATE USER admin with password 'admin'
+GRANT all_admin to admin
+GUEST
+
+create role read_only
+GRANT CONNECT ON DATABASE "FilesDb" to read_only
+GRANT ALL PRIVILEGES ON DATABASE "FilesDb" to read_only
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO read_only
+GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO read_only
+CREATE USER admin with password 'guest'
+GRANT read_only to guest 
