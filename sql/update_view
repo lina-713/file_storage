@@ -1,0 +1,85 @@
+CREATE OR REPLACE PROCEDURE public.curs_procedure(
+	)
+LANGUAGE 'plpgsql'
+AS $BODY$
+declare 
+curs cursor for Select * from typeoffiles;
+full_volume int;
+volume RECORD;
+BEGIN
+open curs;
+loop
+fetch curs into volume;
+exit when not found;
+full_volume := (select COUNT(type_id) from files where files.type_id = typeoffiles.id);
+update view_typeoffiles
+	set count_files = Concat('Всего',rec.size, 'файлов') where view_typeoffiles.id = rec.id;
+end loop;
+close curs;
+end;
+$BODY$;
+
+CREATE OR REPLACE FUNCTION public.add_files_view(
+	oldtable view_files,
+	newtable view_files)
+    RETURNS void
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+AS $BODY$
+BEGIN
+	insert into view_files(name, size, name_type, devicename, expansion, programs ) 
+	VALUES(newTable.name, newTable.size, newTable.name_type,newTable.devicename, newTable.expansion, newTable.programs);
+END;
+$BODY$;
+
+CREATE OR REPLACE FUNCTION public.delete_view_device(
+	oldtable view_device)
+    RETURNS void
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+AS $BODY$
+	BEGIN
+		delete from view_device where view_device.id = oldTable.id;
+	END;
+$BODY$;
+
+CREATE OR REPLACE FUNCTION public.delete_view_files(
+	oldtable view_files)
+    RETURNS void
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+AS $BODY$
+	BEGIN
+		delete from view_files where view_files.id = oldTable.id;
+	END;
+$BODY$;
+
+CREATE OR REPLACE FUNCTION public.update_device_view(
+	oldtable view_device,
+	newtable view_device)
+    RETURNS void
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+AS $BODY$
+BEGIN
+	update view_device set name = newTable.name, memory_size = newTable.memory_size, name_of_type = newTable.name_of_type where id = newTable.id ;
+END;
+$BODY$;
+
+CREATE OR REPLACE FUNCTION public.update_files_view(
+	oldtable view_files,
+	newtable view_files)
+    RETURNS void
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+AS $BODY$
+BEGIN
+	update view_files set name = newTable.name, size = newTable.size, devicename = new.devicename,
+	name_type = newTable.name_type, expansion = newTable.expansion, programs = newTable.programs where id = newTable.id ;
+END;
+$BODY$;
