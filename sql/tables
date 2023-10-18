@@ -40,4 +40,11 @@ CREATE TABLE IF NOT EXISTS public.type_of_device
     CONSTRAINT "TypeOfDevice_pkey" PRIMARY KEY (id)
 )
 
-
+CREATE TABLE IF NOT EXISTS public.typeoffiles
+(
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+    name_type text COLLATE pg_catalog."default" NOT NULL,
+    expansion text COLLATE pg_catalog."default" NOT NULL,
+    programs text COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT "TypeOfFiles_pkey" PRIMARY KEY (id)
+)
